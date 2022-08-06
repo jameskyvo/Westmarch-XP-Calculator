@@ -1,0 +1,3 @@
+﻿  Westmarch XP Calculator.cpp
+C:\Users\plant\source\repos\Westmarch XP Calculator\Westmarch XP Calculator\Westmarch XP Calculator.cpp(22,39): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Westmarch XP Calculator.vcxproj -> C:\Users\plant\source\repos\Westmarch XP Calculator\Debug\Westmarch XP Calculator.exe
