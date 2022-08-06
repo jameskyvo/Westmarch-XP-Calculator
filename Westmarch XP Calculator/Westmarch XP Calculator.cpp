@@ -3,41 +3,42 @@
 
 #include <iostream>
 using namespace std;
-double roleplayingVariable, creativityVariable, etiquetteVariable, completionVariable, questLevelVariable;
-char difficultyVariable;
-double retrieveQuestLevelXP(int levelPar);
+double roleplaying, creativity, etiquette, completion, questLevel;
+char difficulty;
+
+double retrieveQuestLevelXP(int level);
 // Precondition: The user has entered the intended party level for the adventure.
 // Postcondition: The function converts the party level into a base XP value.
-double calculateDifficultyModifier(char difficultyPar);
+double calculateDifficultyModifier(char difficulty);
 //Precondition: The user enters the difficulty as Easy, Medium, or Hard.
 //The function returns .01, .05, or .1 respectively.
-double retrieveFinalXP(double baseXPPar, double roleplayPar, double creativityPar, double etiquettePar, double difficultyPar, double completionPar);
+double retrieveFinalXP(double baseXP, double roleplay, double creativity, double etiquette, double difficulty, double completion);
 // Precondition: The user has inputted correct values for every step in the process.
 // Postcondition: The final recommended experience value is calculated and displayed to the user.
 
 int main()
 {
 	cout << "What was the intended party level for the adventure you designed?\n";
-	cin >> questLevelVariable;
-	double baseXP = retrieveQuestLevelXP(questLevelVariable);
+	cin >> questLevel;
+	double baseXP = retrieveQuestLevelXP(questLevel);
 	cout << "On a scale of 1 to 10, 5 being average, how much did the party roleplay?\n";
-	cin >> roleplayingVariable;
+	cin >> roleplaying;
 	cout << "Was the planned difficulty for this session (E)asy, (M)edium, or (H)ard? Only enter the first letter.\n";
-	cin >> difficultyVariable;
-	double difficultyModifier = calculateDifficultyModifier(difficultyVariable);
+	cin >> difficulty;
+	double difficultyModifier = calculateDifficultyModifier(difficulty);
 	cout << "On a scale of 1 to 10,, 5 being average, how creative was the party?\n";
-	cin >> creativityVariable;
+	cin >> creativity;
 	cout << "On a scale of 1 to 10, 5 being average, was your party respectful and polite? Did you enjoy playing with them?\n";
-	cin >> etiquetteVariable;
+	cin >> etiquette;
 	cout << "On a scale of 1 to 100, how much of the party's goal was completed?\n";
-	cin >> completionVariable;
-	retrieveFinalXP(baseXP, roleplayingVariable, creativityVariable, etiquetteVariable, difficultyModifier, completionVariable);
-	cin >> completionVariable;
+	cin >> completion;
+	retrieveFinalXP(baseXP, roleplaying, creativity, etiquette, difficultyModifier, completion);
+	cin >> completion;
 }
 
-double retrieveQuestLevelXP(int levelPar)
+double retrieveQuestLevelXP(int level)
 {
-	switch (levelPar) {
+	switch (level) {
 	case 1:
 		cout << "Base XP is: 150" << endl;
 			return 150;
@@ -104,25 +105,25 @@ double retrieveQuestLevelXP(int levelPar)
 	}
 }
 
-double retrieveFinalXP(double baseXPPar, double roleplayPar, double creativityPar, double etiquettePar, double difficultyPar, double completionPar) {
-	double roleplayingModifier = ((roleplayPar / 100));
+double retrieveFinalXP(double baseXP, double roleplay, double creativity, double etiquette, double difficulty, double completion) {
+	double roleplayingModifier = ((roleplay / 100));
 	cout << "XP rewarded is increased by " << (roleplayingModifier*100) << "% for RP.\n";
-	double creativityModifier = ((creativityPar / 100));
+	double creativityModifier = ((creativity / 100));
 	cout << "XP rewarded is increased by " << (creativityModifier*100) << "% for creativity.\n";
-	double etiquetteModifier = ((etiquettePar / 100));
+	double etiquetteModifier = ((etiquette / 100));
 	cout << "XP rewarded is increased by " << (etiquetteModifier*100) << "% for good table etiquette.\n";
-	double completionPercentage = (completionPar / 100);
-	cout << "XP rewarded is increased by " << (difficultyPar*100) << "% for the difficulty setting.\n";
-	cout << "Your party completed " << completionPar << "% of their goal.\n";
-	double totalModifiers = (roleplayingModifier + creativityModifier + etiquetteModifier + difficultyPar);
+	double completionPercentage = (completion / 100);
+	cout << "XP rewarded is increased by " << (difficulty*100) << "% for the difficulty setting.\n";
+	cout << "Your party completed " << completion << "% of their goal.\n";
+	double totalModifiers = (roleplayingModifier + creativityModifier + etiquetteModifier + difficulty);
 	cout << "Total experience gain will be increased by: " << (totalModifiers*100) << "%.\n";
-	double finalXP = (baseXPPar * (1 + totalModifiers) * completionPercentage);
+	double finalXP = (baseXP * (1 + totalModifiers) * completionPercentage);
 	cout << "\n----> The recommended XP to award each party member is " << finalXP << ". <----\n";
 	return finalXP;
 }
 
-double calculateDifficultyModifier(char difficultyPar){
-	switch (difficultyPar) {
+double calculateDifficultyModifier(char difficulty){
+	switch (difficulty) {
 	case 'E':
 	case 'e':
 		return 0.01;
